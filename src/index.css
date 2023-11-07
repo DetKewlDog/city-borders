@@ -1,0 +1,223 @@
+:root {
+    --bg1: #1a1a1a;
+    --bg2: #262626;
+
+    --hl1: #2f2f2f;
+    --hl2: #424242;
+    --hl3: #4c4c4c;
+
+    --green1: #45a049;
+    --green2: #4caf50;
+
+    --text1: #ffffff;
+    --text2: #aaaaaa;
+    --text3: #777777;
+
+    --dark-tile-border: #303030;
+    --dark-tile-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+body {
+    background-color: var(--bg1);
+    color: var(--text1);
+    font-family: 'Consolas', monospace;
+    overflow: hidden;
+}
+
+svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header {
+    margin: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+    background-color: var(--bg2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+	margin-inline: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.author a {
+    color: var(--text3);
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.body {
+    padding: 15px;
+	padding-top: 0;
+}
+
+.output {
+    background-color: var(--bg2);
+    padding: 10px;
+    overflow-y: auto;
+    border-radius: 5px;
+	height: calc(100vh - 190px);
+    overflow-y: auto;
+}
+
+div:not(.output) > input {
+    width: calc(27.198% - 16.5px);
+    height: 36.91px;
+    margin-inline: 4px;
+    background-color: var(--bg2);
+    border: none;
+    color: var(--text1);
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease-in-out;
+    margin-bottom: 15px;
+	text-indent: 10px;
+    font-family: 'Consolas', monospace;
+}
+
+input[type=number]:first-of-type { margin-inline-start: 0; }
+button:last-of-type { margin-inline-end: 0; }
+
+div:not(.output) > input:hover {
+	background-color: var(--hl1);
+	transform: translateY(-2px);
+	transition: transform 0.3s ease-in-out;
+}
+
+div:not(.output) > input:active,
+div:not(.output) > input:not(:hover) {
+    background-color: var(--bg2);
+	transform: translateY(2px);
+	transition: transform 0.1s ease-in-out;
+}
+
+input:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.body > div:not(.output) > span {
+    display: none;
+}
+
+.body > div:not(.output) {
+    display: flex;
+}
+
+div:has(+input) > span {
+    display: block !important;
+    width: 200px;
+    margin-left: calc((27.198vw - 16.5px - 200px) / 2);
+    margin-top: -36px;
+    background-color: var(--hl3);
+    color: var(--text1);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+}
+
+div:has(+input) > span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--hl3) transparent transparent transparent;
+}
+
+div:has(+input:hover) > span {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+button {
+    width: 10%;
+    height: 38.9px;
+    padding: 0 15px;
+    margin-inline: 4px;
+    background-color: var(--bg2);
+    border: none;
+    color: var(--text1);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: 'Consolas', monospace;
+}
+
+button:hover {
+    background-color: var(--hl1);
+	transform: translateY(-2px);
+	transition: background-color 0.3s ease-in-out;
+}
+
+button:active,
+button:not(:hover) {
+    background-color: var(--bg2);
+	transform: translateY(2px);
+    transition: background-color 0.1s ease-in-out;
+}
+
+button.on {
+	background-color: var(--green1);
+}
+
+button:hover.on {
+	background-color: var(--green2);
+}
+
+button:active.on,
+button:not(:hover).on {
+    background-color: var(--green1);
+	transform: translateY(2px);
+	transition: transform 0.1s ease-in-out;
+}
+
+img.leaflet-marker-shadow {
+    display: none;
+}
+
+body:has(input[type=checkbox]:checked):has(label:last-of-type input[type=radio]:not(:checked)) .leaflet-tile {
+    filter: var(--dark-tile-filter, none) !important;
+}
+
+.leaflet-container {
+    background: var(--dark-tile-border) !important;
+}
+
+.leaflet-control,
+.leaflet-bar a {
+    background: var(--bg2) !important;
+    color: var(--text2) !important;
+    border: 1px solid var(--hl2) !important;
+}
+
+.leaflet-control:hover > :not(a),
+.leaflet-bar a:hover {
+    background: var(--hl1) !important;
+    border: 1px solid var(--hl3) !important;
+}
+
+input[type=checkbox] + span,
+input[type=radio] + span {
+    user-select: none;
+}
